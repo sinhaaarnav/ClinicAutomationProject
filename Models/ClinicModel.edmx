@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClinicDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointment&#xD;&#xA;">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="datetime" />
+          <Property Name="Criticality" Type="varchar" MaxLength="50" />
+          <Property Name="AppointmentReason" Type="varchar" MaxLength="50" />
+          <Property Name="AppointmentStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DoctorsAdvice">
+          <Key>
+            <PropertyRef Name="DoctorAdviceId" />
+          </Key>
+          <Property Name="DoctorAdviceId" Type="int" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" Nullable="false" />
+          <Property Name="Advice" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DoctorsPrescription">
+          <Key>
+            <PropertyRef Name="DoctorPrescriptionId" />
+          </Key>
+          <Property Name="DoctorPrescriptionId" Type="int" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" Nullable="false" />
+          <Property Name="DrugId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="int" Nullable="false" />
+          <Property Name="DrugName" Type="varchar" MaxLength="50" />
+          <Property Name="DrugExpiry" Type="date" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Dosage" Type="varchar" MaxLength="50" />
+          <Property Name="DrugPrice" Type="int" />
+        </EntityType>
+        <EntityType Name="DrugRequest">
+          <Key>
+            <PropertyRef Name="DrugRequestId" />
+          </Key>
+          <Property Name="DrugRequestId" Type="int" Nullable="false" />
+          <Property Name="DrugId" Type="int" />
+          <Property Name="DrugComposition" Type="varchar" MaxLength="50" />
+          <Property Name="RequestDate" Type="date" />
+          <Property Name="DrugStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PatientName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="ContactNo" Type="int" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="MedicalHistory" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Physician">
+          <Key>
+            <PropertyRef Name="PhysicianId" />
+          </Key>
+          <Property Name="PhysicianId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Specialization" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="ContactNo" Type="int" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="DoctorsDesc" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="int" Nullable="false" />
+          <Property Name="ScheduleDate" Type="datetime" />
+          <Property Name="AppointmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReferenceToId" Type="int" />
+        </EntityType>
+        <EntityContainer Name="ClinicDatabaseModelStoreContainer">
+          <EntitySet Name="Appointment&#xD;&#xA;" EntityType="Self.Appointment&#xD;&#xA;" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorsAdvice" EntityType="Self.DoctorsAdvice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorsPrescription" EntityType="Self.DoctorsPrescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drug" EntityType="Self.Drug" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DrugRequest" EntityType="Self.DrugRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Physician" EntityType="Self.Physician" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment__">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Precision="3" />
+          <Property Name="Criticality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppointmentReason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppointmentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DoctorsAdvice">
+          <Key>
+            <PropertyRef Name="DoctorAdviceId" />
+          </Key>
+          <Property Name="DoctorAdviceId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="Advice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DoctorsPrescription">
+          <Key>
+            <PropertyRef Name="DoctorPrescriptionId" />
+          </Key>
+          <Property Name="DoctorPrescriptionId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="DrugId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="Int32" Nullable="false" />
+          <Property Name="DrugName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugExpiry" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugPrice" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DrugRequest">
+          <Key>
+            <PropertyRef Name="DrugRequestId" />
+          </Key>
+          <Property Name="DrugRequestId" Type="Int32" Nullable="false" />
+          <Property Name="DrugId" Type="Int32" />
+          <Property Name="DrugComposition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestDate" Type="DateTime" Precision="0" />
+          <Property Name="DrugStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Int32" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MedicalHistory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Physician">
+          <Key>
+            <PropertyRef Name="PhysicianId" />
+          </Key>
+          <Property Name="PhysicianId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Int32" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DoctorsDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ClinicDatabaseEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointment__" EntityType="Self.Appointment__" />
+          <EntitySet Name="DoctorsAdvices" EntityType="Self.DoctorsAdvice" />
+          <EntitySet Name="DoctorsPrescriptions" EntityType="Self.DoctorsPrescription" />
+          <EntitySet Name="Drugs" EntityType="Self.Drug" />
+          <EntitySet Name="DrugRequests" EntityType="Self.DrugRequest" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Physicians" EntityType="Self.Physician" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="Users" EntityType="ClinicDatabaseModel.User" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenceToId" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicDatabaseModelStoreContainer" CdmEntityContainer="ClinicDatabaseEntities3">
+          <EntitySetMapping Name="Appointment__">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Appointment__">
+              <MappingFragment StoreEntitySet="Appointment&#xD;&#xA;">
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="Criticality" ColumnName="Criticality" />
+                <ScalarProperty Name="AppointmentReason" ColumnName="AppointmentReason" />
+                <ScalarProperty Name="AppointmentStatus" ColumnName="AppointmentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorsAdvices">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.DoctorsAdvice">
+              <MappingFragment StoreEntitySet="DoctorsAdvice">
+                <ScalarProperty Name="DoctorAdviceId" ColumnName="DoctorAdviceId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="Advice" ColumnName="Advice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorsPrescriptions">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.DoctorsPrescription">
+              <MappingFragment StoreEntitySet="DoctorsPrescription">
+                <ScalarProperty Name="DoctorPrescriptionId" ColumnName="DoctorPrescriptionId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Drug">
+              <MappingFragment StoreEntitySet="Drug">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="DrugExpiry" ColumnName="DrugExpiry" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="DrugPrice" ColumnName="DrugPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DrugRequests">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.DrugRequest">
+              <MappingFragment StoreEntitySet="DrugRequest">
+                <ScalarProperty Name="DrugRequestId" ColumnName="DrugRequestId" />
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="DrugComposition" ColumnName="DrugComposition" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="DrugStatus" ColumnName="DrugStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Physicians">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Physician">
+              <MappingFragment StoreEntitySet="Physician">
+                <ScalarProperty Name="PhysicianId" ColumnName="PhysicianId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DoctorsDesc" ColumnName="DoctorsDesc" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClinicDatabaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ReferenceToId" ColumnName="ReferenceToId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
